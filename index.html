@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bake & Brew | Artisan Cafe & Bakery</title>
+  <!-- Tailwind CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .header-glass {
+      z-index: 40 !important;
+    }
+    #cartDrawer {
+      z-index: 9999 !important;
+    }
+  </style>
+</head>
+<body class="theme-body font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- Header / Navigation Bar -->
+  <header class="header-glass sticky top-0 border-b transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-rose-400 flex items-center justify-center text-slate-950 font-black shadow-lg shadow-amber-500/20">
+          <i class="fa-solid fa-mug-hot text-xl"></i>
+        </div>
+        <div>
+          <span class="text-xl font-black tracking-tight text-brand">Bake & Brew</span>
+          <span class="block text-[10px] font-extrabold tracking-widest text-amber-500 uppercase">Artisan Cafe & Bakery</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-wider">
+        <button onclick="switchMode('customer')" id="nav-menu" class="nav-link active">
+          <i class="fa-solid fa-book-open mr-1.5"></i> <span>Bakery Menu</span>
+        </button>
+        <button onclick="switchMode('customer'); scrollToSection('bookingSection')" class="nav-link">
+          <i class="fa-solid fa-chair mr-1.5"></i> <span>Table Reservation</span>
+        </button>
+        <button onclick="switchMode('admin')" id="nav-admin" class="nav-link text-amber-400 hidden items-center gap-1.5">
+          <i class="fa-solid fa-user-gear"></i> <span>Owner Panel</span>
+          <span class="bg-amber-500/20 border border-amber-500/30 text-amber-400 text-[10px] px-1.5 py-0.5 rounded-full">Admin</span>
+        </button>
+      </nav>
+
+      <!-- Action Controls -->
+      <div class="flex items-center gap-3">
+        <!-- Auth Button -->
+        <button onclick="handleAuthClick()" id="loginBtn" class="text-xs font-extrabold px-3.5 py-2.5 rounded-xl transition shadow-lg shadow-amber-500/20" style="background-color: #f59e0b !important; color: #1c1917 !important;">
+          <span>Staff Login</span>
+        </button>
+
+        <!-- Cart Drawer Toggle -->
+        <button onclick="toggleCartDrawer()" class="relative bg-card text-brand p-2.5 rounded-xl border card-border transition">
+          <i class="fa-solid fa-cart-shopping text-base text-amber-400"></i>
+          <span id="cartCountBadge" class="absolute -top-1.5 -right-1.5 bg-amber-500 text-slate-950 font-black text-[10px] w-5 h-5 rounded-full flex items-center justify-center">0</span>
+        </button>
+
+        <!-- Theme Switcher -->
+        <button id="themeToggleBtn" onclick="toggleTheme()" class="theme-toggle-btn p-2.5 rounded-xl border transition-all flex items-center gap-2 text-xs font-semibold" title="Toggle Theme">
+          <i id="themeIcon" class="fa-solid fa-moon text-amber-400"></i>
+          <span id="themeLabel" class="hidden sm:inline">Dark</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Notification Toast Container -->
+  <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- CUSTOMER FACING PORTAL -->
+  <div id="customerView" class="view-section space-y-8 flex-1">
+    
+    <!-- Hero Banner -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <div class="relative rounded-3xl overflow-hidden border card-border shadow-2xl p-8 md:p-12 hero-banner">
+        <div class="max-w-2xl space-y-4 relative z-10">
+          <span class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+            <i class="fa-solid fa-cookie-bite text-xs"></i> <span>Freshly Baked Daily</span>
+          </span>
+          <h1 class="text-3xl md:text-5xl font-black text-brand leading-tight">Fresh Bakes & Artisan Coffee!</h1>
+          <p class="text-xs md:text-sm text-sub font-medium leading-relaxed">Savor handcrafted pastries, gourmet cakes, and specialty brews in a cozy ambience.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Filter Bar -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+      <div class="card-bg rounded-2xl p-4 border card-border flex items-center justify-between flex-wrap gap-4">
+        <div class="flex items-center gap-2 flex-wrap" id="categoryFilterGroup">
+          <button onclick="filterCategory('All')" class="cat-btn active text-xs font-bold px-4 py-2 rounded-xl">All Items</button>
+          <button onclick="filterCategory('Coffee')" class="cat-btn text-xs font-bold px-4 py-2 rounded-xl">Coffee & Brews</button>
+          <button onclick="filterCategory('Bakery')" class="cat-btn text-xs font-bold px-4 py-2 rounded-xl">Cakes & Pastries</button>
+          <button onclick="filterCategory('Snacks')" class="cat-btn text-xs font-bold px-4 py-2 rounded-xl">Snacks & Burgers</button>
+          <button onclick="filterCategory('Shakes')" class="cat-btn text-xs font-bold px-4 py-2 rounded-xl">Shakes & Coolers</button>
+        </div>
+
+        <div class="flex items-center gap-3 w-full sm:w-auto">
+          <div class="relative w-full sm:w-64">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-xs"></i>
+            <input type="text" id="menuSearchInput" oninput="searchMenu()" placeholder="Search bakery items..." class="input-field w-full pl-9 pr-3 py-2 text-xs rounded-xl font-medium">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic Menu Grid -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div id="customerMenuGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+
+    <!-- Table Booking Form Section -->
+    <section id="bookingSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="card-bg rounded-3xl border card-border p-8 md:p-12">
+        <div class="max-w-xl mx-auto text-center space-y-2 mb-8">
+          <span class="text-xs font-extrabold text-amber-500 uppercase tracking-widest">Reserve Your Table</span>
+          <h2 class="text-3xl font-black text-brand">Book A Cafe Table</h2>
+          <p class="text-xs text-sub">Instant table reservation confirmed directly via WhatsApp.</p>
+        </div>
+
+        <form onsubmit="handleTableBooking(event)" class="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="text-[11px] font-bold text-sub uppercase">Full Name *</label>
+            <input type="text" id="bookName" required placeholder="Aarav Sharma" class="input-field w-full px-3.5 py-2.5 text-xs rounded-xl font-medium mt-1">
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-sub uppercase">Phone Number *</label>
+            <input type="tel" id="bookPhone" required placeholder="+91 9876543210" class="input-field w-full px-3.5 py-2.5 text-xs rounded-xl font-medium mt-1">
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-sub uppercase">Date *</label>
+            <input type="date" id="bookDate" required class="input-field w-full px-3.5 py-2.5 text-xs rounded-xl font-medium mt-1">
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-sub uppercase">Time Slot *</label>
+            <select id="bookTime" class="input-field w-full px-3.5 py-2.5 text-xs rounded-xl font-medium mt-1">
+              <option value="10:00 AM">10:00 AM (Morning Coffee)</option>
+              <option value="01:00 PM">01:00 PM (Lunch)</option>
+              <option value="04:30 PM">04:30 PM (Evening Snacks)</option>
+              <option value="07:30 PM">07:30 PM (Dinner)</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-sub uppercase">Number of Guests *</label>
+            <input type="number" id="bookGuests" min="1" max="10" value="2" required class="input-field w-full px-3.5 py-2.5 text-xs rounded-xl font-medium mt-1">
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-sub uppercase">Special Request</label>
+            <input type="text" id="bookNotes" placeholder="Birthday Candle / Window Seat" class="input-field w-full px-3.5 py-2.5 text-xs rounded-xl font-medium mt-1">
+          </div>
+
+          <div class="sm:col-span-2 pt-2">
+            <button type="submit" class="w-full font-extrabold text-xs py-3.5 rounded-xl transition shadow-xl shadow-amber-500/20 flex items-center justify-center gap-2" style="background-color: #f59e0b !important; color: #1c1917 !important;">
+              <i class="fa-brands fa-whatsapp text-lg"></i> <span>Confirm Table via WhatsApp</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <!-- ADMIN / OWNER DASHBOARD -->
+  <div id="adminView" class="view-section max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 flex-1 hidden">
+    <div class="card-bg p-6 rounded-3xl border card-border flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div>
+        <span class="text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30 px-3 py-1 rounded-full uppercase">Cafe Manager</span>
+        <h2 class="text-2xl font-black text-brand mt-2">Menu & Bookings Management</h2>
+      </div>
+      <button onclick="openAddItemModal()" class="font-extrabold text-xs px-4 py-2.5 rounded-xl transition shadow-lg shadow-amber-500/20 flex items-center gap-2" style="background-color: #f59e0b !important; color: #1c1917 !important;">
+        <i class="fa-solid fa-plus"></i> Add Bakery Item
+      </button>
+    </div>
+
+    <div class="card-bg rounded-2xl border card-border overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-card text-sub font-bold uppercase tracking-wider border-b card-border">
+            <tr>
+              <th class="p-4">Item Details</th>
+              <th class="p-4">Category</th>
+              <th class="p-4">Price (₹)</th>
+              <th class="p-4">Stock</th>
+              <th class="p-4 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminMenuTableBody" class="divide-y card-border font-medium"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHOPPING CART DRAWER -->
+  <div id="cartDrawer" class="fixed inset-0 hidden" style="z-index: 9999 !important;">
+    <div onclick="toggleCartDrawer()" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+    <div class="absolute right-0 top-0 bottom-0 max-w-md w-full card-bg border-l card-border p-6 flex flex-col justify-between z-10 shadow-2xl">
+      <div>
+        <div class="flex justify-between items-center border-b card-border pb-4 pt-2">
+          <h3 class="font-extrabold text-brand text-lg flex items-center gap-2">
+            <i class="fa-solid fa-cart-shopping text-amber-500"></i> 
+            <span>Cafe Order Cart</span>
+          </h3>
+          <button onclick="toggleCartDrawer()" class="p-2 rounded-xl flex items-center justify-center w-9 h-9 shadow-md transition" style="background-color: #f59e0b !important; color: #1c1917 !important;">
+            <i class="fa-solid fa-xmark text-lg font-bold"></i>
+          </button>
+        </div>
+        <div id="cartItemsContainer" class="py-4 space-y-3 max-h-[45vh] overflow-y-auto"></div>
+        <div class="space-y-3 pt-3 border-t card-border">
+          <div>
+            <label class="text-[10px] font-bold text-sub uppercase">Your Name *</label>
+            <input type="text" id="cartCustomerName" placeholder="Enter name" class="input-field w-full px-3 py-2 text-xs rounded-xl mt-1">
+          </div>
+          <div>
+            <label class="text-[10px] font-bold text-sub uppercase">WhatsApp Number *</label>
+            <input type="tel" id="cartCustomerPhone" placeholder="+91 XXXXXXXXXX" class="input-field w-full px-3 py-2 text-xs rounded-xl mt-1">
+          </div>
+        </div>
+      </div>
+      <div class="border-t card-border pt-4 space-y-3">
+        <div class="space-y-1.5 text-xs font-bold">
+          <div class="flex justify-between text-sub"><span>Subtotal:</span><span id="cartSubtotal">₹0</span></div>
+          <div class="flex justify-between text-sub"><span>GST (5%):</span><span id="cartTax">₹0</span></div>
+          <div class="flex justify-between text-brand text-sm font-black pt-2 border-t card-border"><span>Total:</span><span id="cartTotal" class="text-amber-500">₹0</span></div>
+        </div>
+        <button onclick="handleCheckout()" class="w-full font-extrabold text-xs py-3 rounded-xl transition shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2" style="background-color: #f59e0b !important; color: #1c1917 !important;">
+          <i class="fa-brands fa-whatsapp text-base"></i> <span>Send Order via WhatsApp</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD / EDIT ITEM -->
+  <div id="itemModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
+    <div class="card-bg max-w-md w-full p-6 rounded-3xl border card-border space-y-4 relative shadow-2xl">
+      <button onclick="closeModal('itemModal')" class="absolute top-6 right-6 text-slate-400 hover:text-brand"><i class="fa-solid fa-xmark text-xl"></i></button>
+      <h3 id="itemModalTitle" class="text-xl font-extrabold text-brand">Add Bakery Item</h3>
+      <form onsubmit="handleItemSave(event)" class="space-y-3">
+        <input type="hidden" id="editItemId" value="">
+        <div>
+          <label class="text-[11px] font-bold text-sub uppercase">Item Title</label>
+          <input type="text" id="itemTitle" required placeholder="Choco Truffle Pastry" class="input-field w-full px-3.5 py-2 text-xs rounded-xl font-medium mt-1">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="text-[11px] font-bold text-sub uppercase">Category</label>
+            <select id="itemCategory" class="input-field w-full px-3.5 py-2 text-xs rounded-xl font-medium mt-1">
+              <option value="Coffee">Coffee</option>
+              <option value="Bakery">Bakery</option>
+              <option value="Snacks">Snacks</option>
+              <option value="Shakes">Shakes</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-sub uppercase">Price (₹)</label>
+            <input type="number" id="itemPrice" required placeholder="180" class="input-field w-full px-3.5 py-2 text-xs rounded-xl font-medium mt-1">
+          </div>
+        </div>
+        <div>
+          <label class="text-[11px] font-bold text-sub uppercase">Image URL</label>
+          <input type="url" id="itemImage" required placeholder="https://images.unsplash.com/..." class="input-field w-full px-3.5 py-2 text-xs rounded-xl font-medium mt-1">
+        </div>
+        <div>
+          <label class="text-[11px] font-bold text-sub uppercase">Description</label>
+          <textarea id="itemDesc" rows="2" placeholder="Rich Belgian chocolate pastry..." class="input-field w-full px-3.5 py-2 text-xs rounded-xl font-medium mt-1"></textarea>
+        </div>
+        <button type="submit" class="w-full font-extrabold text-xs py-3 rounded-xl transition shadow-lg shadow-amber-500/20" style="background-color: #f59e0b !important; color: #1c1917 !important;">
+          Save Item
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: AUTH -->
+  <div id="authModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
+    <div class="card-bg max-w-md w-full p-6 rounded-3xl border card-border space-y-4 relative shadow-2xl">
+      <button onclick="closeModal('authModal')" class="absolute top-6 right-6 text-slate-400 hover:text-brand"><i class="fa-solid fa-xmark text-xl"></i></button>
+      <h3 class="text-xl font-black text-brand text-center">Cafe Staff Login</h3>
+      <form onsubmit="handleAuthLogin(event)" class="space-y-3">
+        <div>
+          <label class="text-[11px] font-bold text-sub uppercase">Username</label>
+          <input type="text" required value="owner@bakeandbrew.in" class="input-field w-full px-3.5 py-2.5 text-xs rounded-xl mt-1">
+        </div>
+        <div>
+          <label class="text-[11px] font-bold text-sub uppercase">Password</label>
+          <input type="password" required value="admin123" class="input-field w-full px-3.5 py-2.5 text-xs rounded-xl mt-1">
+        </div>
+        <button type="submit" class="w-full font-extrabold text-xs py-3 rounded-xl transition shadow-lg shadow-amber-500/20 mt-2" style="background-color: #f59e0b !important; color: #1c1917 !important;">
+          Log In
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t card-border py-4 px-6 text-xs text-sub flex justify-between items-center mt-auto">
+    <span>&copy; 2026 Bake & Brew Artisan Cafe. All rights reserved.</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
