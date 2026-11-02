@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bake & Brew | Artisan Cafe & Bakery</title>
+  <meta name="description" content="Bake & Brew Artisan Cafe & Bakery: freshly baked cakes and pastries, specialty coffee, snacks and shakes. Order takeaway and book a table via WhatsApp.">
+  <meta name="theme-color" content="#f5ede0">
+  <meta property="og:title" content="Bake & Brew | Artisan Cafe & Bakery">
+  <meta property="og:description" content="Fresh bakes, artisan coffee, takeaway orders and table booking via WhatsApp.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="#customerView" class="skip-link">Skip to content</a>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <div class="topbar">Freshly baked daily &nbsp;&#10022;&nbsp; Order ahead on WhatsApp</div>
+
+  <!-- Masthead -->
+  <header class="site-header" id="siteHeader">
+    <div class="masthead container">
+      <span class="mast-note"><i class="fa-solid fa-wheat-awn"></i> Cakes &middot; Pastries &middot; Coffee</span>
+
+      <a href="#" class="brand" id="brandLink" aria-label="Bake & Brew home">
+        <strong>Bake &amp; Brew</strong>
+        <small><span></span>Artisan Cafe &amp; Bakery<span></span></small>
+      </a>
+
+      <div class="header-actions">
+        <button class="btn btn-outline btn-sm" id="loginBtn"><span id="loginBtnText">Staff Login</span></button>
+        <button class="icon-btn" id="themeToggleBtn" aria-label="Toggle light and dark theme"><i id="themeIcon" class="fa-solid fa-moon"></i></button>
+        <button class="icon-btn" id="openCartBtn" aria-label="Open cart"><i class="fa-solid fa-bag-shopping"></i><span id="cartCountBadge" class="badge">0</span></button>
+        <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+
+    <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+      <div class="container nav-inner">
+        <button class="nav-link active" id="nav-menu" data-nav="menu"><i class="fa-solid fa-book-open"></i> <span>Bakery Menu</span></button>
+        <button class="nav-link" id="nav-booking" data-nav="booking"><i class="fa-solid fa-chair"></i> <span>Table Reservation</span></button>
+        <button class="nav-link hidden" id="nav-admin" data-nav="admin"><i class="fa-solid fa-user-gear"></i> <span>Owner Panel</span></button>
+        <button class="nav-link hidden" id="nav-settings" data-nav="settings"><i class="fa-solid fa-gear"></i> <span>Settings</span></button>
+        <button class="nav-link nav-login-mobile" data-nav="login"><i class="fa-solid fa-right-to-bracket"></i> <span id="navLoginText">Staff Login</span></button>
+      </div>
+    </nav>
+  </header>
+
+  <div id="toastContainer" class="toasts" aria-live="polite"></div>
+
+  <main>
+    <!-- ================= CUSTOMER VIEW ================= -->
+    <div id="customerView" class="view">
+      <section class="container hero-wrap">
+        <div class="hero reveal">
+          <div class="hero-text">
+            <span class="kicker">Freshly Baked Daily</span>
+            <h1>Fresh Bakes &amp; <em>Artisan Coffee</em></h1>
+            <p class="hero-sub">Savor handcrafted pastries, gourmet cakes and specialty brews in a cozy ambience.</p>
+            <div class="hero-cta">
+              <a href="#menuSection" class="btn btn-primary"><i class="fa-solid fa-mug-hot"></i> Explore Menu</a>
+              <a href="#bookingSection" class="btn btn-outline"><i class="fa-solid fa-chair"></i> Book a Table</a>
+            </div>
+            <ul class="hero-stats">
+              <li><strong>Cakes &amp; Pastries</strong><span>Baked fresh</span></li>
+              <li><strong>Specialty Coffee</strong><span>Hot &amp; cold</span></li>
+              <li><strong>WhatsApp Orders</strong><span>Skip the queue</span></li>
+            </ul>
+          </div>
+
+          <div class="hero-art" aria-hidden="true">
+            <figure class="frame frame-a"><img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80" alt="" onerror="this.style.display='none'"></figure>
+            <figure class="frame frame-b"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" alt="" onerror="this.style.display='none'"></figure>
+            <div class="seal"><span>Baked</span><strong>Fresh</strong><span>Daily</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="container features reveal" aria-label="Why Bake & Brew">
+        <div class="feature"><i class="fa-solid fa-cake-candles"></i><h3>Fresh from the oven</h3><p>Cakes, croissants and pastries baked daily.</p></div>
+        <div class="feature"><i class="fa-solid fa-mug-saucer"></i><h3>Artisan brews</h3><p>Handcrafted coffee and thick, creamy shakes.</p></div>
+        <div class="feature"><i class="fa-brands fa-whatsapp"></i><h3>Order ahead</h3><p>Send your order on WhatsApp for quick pickup.</p></div>
+        <div class="feature"><i class="fa-solid fa-couch"></i><h3>Cozy ambience</h3><p>Reserve a table for family and friends.</p></div>
+      </section>
+
+      <section id="menuSection" class="container section">
+        <div class="section-head reveal">
+          <span class="eyebrow">What we serve</span>
+          <h2>Our Menu</h2>
+          <div class="ornament"><span></span><i class="fa-solid fa-wheat-awn"></i><span></span></div>
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" id="menuSearchInput" placeholder="Search bakery items..." aria-label="Search the menu" autocomplete="off">
+          </div>
+        </div>
+
+        <div class="filters reveal" id="categoryFilterGroup" role="tablist" aria-label="Menu categories"></div>
+
+        <div id="customerMenuGrid" class="menu-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="bookingSection" class="container section">
+        <div class="panel reveal">
+          <div class="center-head">
+            <span class="eyebrow">Reserve Your Table</span>
+            <h2>Book A Cafe Table</h2>
+            <div class="ornament"><span></span><i class="fa-solid fa-wheat-awn"></i><span></span></div>
+            <p class="muted">Send your reservation request instantly via WhatsApp.</p>
+          </div>
+
+          <form id="bookingForm" class="form-grid" novalidate>
+            <label class="field"><span>Full Name *</span><input type="text" id="bookName" placeholder="Aarav Sharma" autocomplete="name" required></label>
+            <label class="field"><span>Phone Number *</span><input type="tel" id="bookPhone" placeholder="+91 9876543210" autocomplete="tel" required></label>
+            <label class="field"><span>Date *</span><input type="date" id="bookDate" required></label>
+            <label class="field"><span>Time Slot *</span>
+              <select id="bookTime">
+                <option value="10:00 AM">10:00 AM (Morning Coffee)</option>
+                <option value="01:00 PM">01:00 PM (Lunch)</option>
+                <option value="04:30 PM">04:30 PM (Evening Snacks)</option>
+                <option value="07:30 PM">07:30 PM (Dinner)</option>
+              </select>
+            </label>
+            <label class="field"><span>Number of Guests *</span><input type="number" id="bookGuests" min="1" max="10" value="2" required></label>
+            <label class="field"><span>Special Request</span><input type="text" id="bookNotes" placeholder="Birthday Candle / Window Seat"></label>
+            <div class="span-2">
+              <button type="submit" class="btn btn-primary btn-block btn-lg"><i class="fa-brands fa-whatsapp"></i> Request Table via WhatsApp</button>
+              <p class="hint">Your table is confirmed once the cafe replies on WhatsApp.</p>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= ADMIN VIEW ================= -->
+    <div id="adminView" class="view container hidden">
+      <div class="panel admin-head">
+        <div>
+          <span class="eyebrow">Cafe Manager</span>
+          <h2>Menu &amp; Bookings Management</h2>
+          <p class="muted">Manage items, stock availability and table reservations.</p>
+        </div>
+        <button class="btn btn-primary" id="addItemBtn"><i class="fa-solid fa-plus"></i> Add Bakery Item</button>
+      </div>
+
+      <div class="stats-grid" id="adminStats"></div>
+
+      <div class="tabs">
+        <button class="tab active" id="admTab-menu" data-admtab="menu">Menu Inventory</button>
+        <button class="tab" id="admTab-bookings" data-admtab="bookings">Reservations <span class="tab-count" id="bookingTabCount">0</span></button>
+      </div>
+
+      <div id="adminSub-menu" class="panel flush">
+        <div class="table-tools">
+          <span class="muted small">Backup or move your menu between devices.</span>
+          <div>
+            <button class="btn btn-outline btn-sm" id="exportMenuBtn"><i class="fa-solid fa-download"></i> Export</button>
+            <button class="btn btn-outline btn-sm" id="importMenuBtn"><i class="fa-solid fa-upload"></i> Import</button>
+            <input type="file" id="importMenuFile" accept="application/json" hidden>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Item</th><th>Category</th><th>Price (₹)</th><th>Stock</th><th class="right">Actions</th></tr></thead>
+            <tbody id="adminMenuTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="adminSub-bookings" class="panel flush hidden">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Guest</th><th>Phone</th><th>Date &amp; Time</th><th>Guests</th><th>Notes</th><th>Status</th><th class="right">Actions</th></tr></thead>
+            <tbody id="adminBookingsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= SETTINGS VIEW ================= -->
+    <div id="settingsView" class="view container narrow hidden">
+      <div class="settings-head">
+        <h2>Cafe Settings</h2>
+        <p class="muted">Business name, WhatsApp number, GST and owner password.</p>
+      </div>
+
+      <div class="panel">
+        <h3 class="panel-title">Business Profile</h3>
+        <form id="settingsForm" class="form-grid" novalidate>
+          <label class="field"><span>Cafe Name</span><input type="text" id="settingRestName" required></label>
+          <label class="field"><span>Owner WhatsApp Number (with country code)</span><input type="text" id="settingOwnerPhone" inputmode="numeric" required></label>
+          <label class="field"><span>GST Tax Rate (%)</span><input type="number" step="0.1" min="0" max="28" id="settingGstRate"></label>
+          <label class="field"><span>Max Guests per Reservation</span><input type="number" min="1" max="100" id="settingMaxGuests"></label>
+          <div class="span-2"><button type="submit" class="btn btn-primary">Save Settings</button></div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3 class="panel-title">Change Owner Password</h3>
+        <form id="passwordForm" class="form-grid" novalidate>
+          <label class="field"><span>New Password (min 6 characters)</span><input type="password" id="newPass" autocomplete="new-password"></label>
+          <label class="field"><span>Confirm Password</span><input type="password" id="newPassConfirm" autocomplete="new-password"></label>
+          <div class="span-2"><button type="submit" class="btn btn-outline">Update Password</button></div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <strong class="footer-brand">Bake &amp; Brew</strong>
+      <div class="ornament"><span></span><i class="fa-solid fa-wheat-awn"></i><span></span></div>
+      <span>&copy; <span id="footerYear">2026</span> <span id="footerRestName">Bake &amp; Brew Cafe</span>. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTopBtn" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <!-- Cart Drawer -->
+  <div id="cartDrawer" class="drawer hidden" aria-hidden="true">
+    <div class="drawer-overlay" data-close="cartDrawer"></div>
+    <aside class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+      <div class="drawer-head">
+        <h3 id="cartTitle"><i class="fa-solid fa-bag-shopping"></i> Your Order</h3>
+        <button class="icon-btn" data-close="cartDrawer" aria-label="Close cart"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="drawer-body">
+        <div id="cartItemsContainer" class="cart-items"></div>
+        <form id="checkoutForm" class="checkout" novalidate>
+          <div class="segmented seg-radio" role="radiogroup" aria-label="Order type">
+            <label><input type="radio" name="orderType" value="Pickup" checked><span><i class="fa-solid fa-bag-shopping"></i> Pickup</span></label>
+            <label><input type="radio" name="orderType" value="Dine-in"><span><i class="fa-solid fa-chair"></i> Dine-in</span></label>
+          </div>
+          <label class="field"><span>Your Name *</span><input type="text" id="cartCustomerName" placeholder="Enter name" autocomplete="name"></label>
+          <label class="field"><span>WhatsApp Number *</span><input type="tel" id="cartCustomerPhone" placeholder="+91 XXXXXXXXXX" autocomplete="tel"></label>
+          <label class="field"><span>Payment Method</span>
+            <select id="cartPaymentMethod">
+              <option value="UPI">UPI (GPay / PhonePe / Paytm)</option>
+              <option value="Cash">Cash at Counter</option>
+            </select>
+          </label>
+          <label class="field"><span>Note (optional)</span><input type="text" id="cartNote" placeholder="Extra hot, less sugar, pickup time…"></label>
+        </form>
+      </div>
+      <div class="drawer-foot">
+        <div class="totals">
+          <div><span>Subtotal</span><span id="cartSubtotal">₹0</span></div>
+          <div><span>GST (<span id="cartGstPercent">5</span>%)</span><span id="cartTax">₹0</span></div>
+          <div class="grand"><span>Total</span><span id="cartTotal">₹0</span></div>
+        </div>
+        <button class="btn btn-primary btn-block" id="checkoutBtn"><i class="fa-brands fa-whatsapp"></i> Send Order via WhatsApp</button>
+        <button class="link-btn" id="clearCartBtn">Clear cart</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Item Modal -->
+  <div id="itemModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-overlay" data-close="itemModal"></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="itemModalTitle">
+      <button class="icon-btn modal-x" data-close="itemModal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+      <h3 id="itemModalTitle">Add Bakery Item</h3>
+      <form id="itemForm" class="stack" novalidate>
+        <input type="hidden" id="editItemId">
+        <label class="field"><span>Item Title</span><input type="text" id="itemTitle" placeholder="Choco Truffle Pastry" required></label>
+        <div class="two-col">
+          <label class="field"><span>Category</span>
+            <select id="itemCategory"><option value="Coffee">Coffee</option><option value="Bakery">Bakery</option><option value="Snacks">Snacks</option><option value="Shakes">Shakes</option></select>
+          </label>
+          <label class="field"><span>Price (₹)</span><input type="number" min="1" step="1" id="itemPrice" placeholder="180" required></label>
+        </div>
+        <label class="field"><span>Image URL (https)</span><input type="url" id="itemImage" placeholder="https://images.unsplash.com/..." required></label>
+        <label class="field"><span>Description</span><textarea id="itemDesc" rows="2" placeholder="Rich Belgian chocolate pastry..."></textarea></label>
+        <button type="submit" class="btn btn-primary btn-block">Save Item</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Auth Modal -->
+  <div id="authModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-overlay" data-close="authModal"></div>
+    <div class="modal-card small" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <button class="icon-btn modal-x" data-close="authModal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+      <div class="center-head">
+        <h3 id="authTitle">Cafe Staff Login</h3>
+        <p class="muted small" id="authSubtitle">Enter your password to open the management panel.</p>
+      </div>
+      <form id="authForm" class="stack" novalidate>
+        <label class="field"><span id="authPassLabel">Password</span><input type="password" id="authPass" autocomplete="current-password" required></label>
+        <label class="field hidden" id="authConfirmWrap"><span>Confirm Password</span><input type="password" id="authPassConfirm" autocomplete="new-password"></label>
+        <p class="error-text hidden" id="authError"></p>
+        <button type="submit" class="btn btn-primary btn-block" id="authSubmit">Log In</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
